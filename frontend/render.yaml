@@ -3,7 +3,7 @@ services:
     name: evoltsoft-frontend
     env: static
     buildCommand: "npm install && npm run build"
-    startCommand: "npm run preview"
+    startCommand: "npm run dev"
     staticPublishPath: "dist"
     envVars:
       - key: VITE_API_URL
