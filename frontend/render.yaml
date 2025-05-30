@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: evoltsoft-frontend
+    env: static
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run preview"
+    staticPublishPath: "dist"
+    envVars:
+      - key: VITE_API_URL
+        fromSecret: VITE_API_URL
+    routes:
+      - type: static
+        path: "/*"
+        file: "index.html"
+    healthCheckPath: "/health"
+    allowInsecure: true
+    
+  - type: environment
+    name: evoltsoft-frontend-env
+    env:
+      VITE_API_URL: "https://evoltsoft.onrender.com/api"
+    secrets:
+      - name: VITE_API_URL
+        value: "https://evoltsoft.onrender.com/api"
