@@ -66,6 +66,20 @@ backend/
 - `npm run dev`: Start the development server with hot-reload
 - `npm test`: Run tests (not implemented yet)
 
+
+## API Endpoints
+
+### Authentication
+- `POST /api/auth/register` - Register a new user
+- `POST /api/auth/login` - Login user
+
+### Charging Stations
+- `GET /api/stations` - Get all charging stations
+- `GET /api/stations/:id` - Get single station
+- `POST /api/stations` - Create new station (protected)
+- `PUT /api/stations/:id` - Update station (protected)
+- `DELETE /api/stations/:id` - Delete station (protected)
+
 ## API Documentation
 
 API documentation is available at [API Docs](https://documenter.getpostman.com/view/38263185/2sB2qgcxdg)
