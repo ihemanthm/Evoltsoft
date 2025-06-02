@@ -62,8 +62,6 @@ frontend/
 2. Install dependencies:
    ```bash
    npm install
-   # or
-   yarn
    ```
 
 ### Development
@@ -72,24 +70,18 @@ Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
 ```
 
 ### Building for Production
 
 ```bash
 npm run build
-# or
-yarn build
 ```
 
 ### Preview Production Build
 
 ```bash
 npm run preview
-# or
-yarn preview
 ```
 
 ## Features
@@ -116,16 +108,11 @@ Create a `.env` file in the root directory with the following variables:
 
 ```env
 VITE_API_BASE_URL=your_api_base_url
+VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
 ```
 
-## Contributing
+## Deployement
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+You can find the Deployed version of this project at [Here](https://evoltsoft-1.onrender.com)
 
-## License
 
-This project is licensed under the MIT License.
