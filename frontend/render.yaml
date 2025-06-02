@@ -1,19 +1,29 @@
+# Render Blueprint for EV Charge Network Frontend
+
 services:
   - type: web
     name: evoltsoft-frontend
-    env: static
-    buildCommand: "npm install && npm run build"
-    startCommand: "npm run preview"
-    staticPublishPath: "dist"
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview -- --host
     envVars:
+      - key: NODE_VERSION
+        value: 18.x
+      - key: NODE_ENV
+        value: production
       - key: VITE_API_URL
         fromSecret: VITE_API_URL
+    build:
+      nodeVersion: 18.x
+    staticPublishPath: ./dist
     routes:
-      - type: static
-        path: "/*"
-        file: "index.html"
-    healthCheckPath: "/health"
-    allowInsecure: true
+      - type: rewrite
+        source: '/*'
+        destination: '/index.html'
+    autoDeploy: true
+    plan: free
+    region: oregon
+    healthCheckPath: /
     
   - type: environment
     name: evoltsoft-frontend-env
