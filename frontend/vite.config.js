@@ -17,6 +17,14 @@ export default defineConfig(({ command, mode }) => {
         'vue': 'vue/dist/vue.esm-bundler.js'
       }
     },
+    css: {
+      devSourcemap: true,
+      preprocessorOptions: {
+        css: {
+          additionalData: `@import "@/assets/main.css";`
+        }
+      }
+    },
     optimizeDeps: {
       include: ['vue', 'vue-router', 'pinia']
     },
@@ -35,7 +43,14 @@ export default defineConfig(({ command, mode }) => {
           },
           entryFileNames: 'assets/js/[name].[hash].js',
           chunkFileNames: 'assets/js/[name].[hash].js',
-          assetFileNames: 'assets/[ext]/[name].[hash][ext]',
+          assetFileNames: (assetInfo) => {
+            const info = assetInfo.name.split('.');
+            const ext = info[info.length - 1];
+            if (['css', 'woff', 'woff2', 'ttf', 'eot', 'svg'].includes(ext)) {
+              return `assets/css/[name].[hash][extname]`;
+            }
+            return 'assets/[ext]/[name].[hash][extname]';
+          },
         },
       },
       terserOptions: {
@@ -51,7 +66,10 @@ export default defineConfig(({ command, mode }) => {
     },
     preview: {
       port: 8080,
-      open: true
+      open: true,
+      headers: {
+        'Content-Type': 'text/css; charset=utf-8',
+      }
     }
   };
 });
