@@ -12,34 +12,34 @@ export default defineConfig(({ mode }) => ({
       'vue': 'vue/dist/vue.esm-bundler.js'
     }
   },
+  optimizeDeps: {
+    include: ['vue', 'vue-router', 'pinia']
+  },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: mode !== 'production',
     minify: 'terser',
-    terserOptions: {
-      compress: {
-        keep_infinity: true,
-        drop_console: mode === 'production',
-        drop_debugger: mode === 'production'
-      }
-    },
     rollupOptions: {
       output: {
         manualChunks: {
-          vue: ['vue', 'vue-router', 'pinia'],
-          vendor: ['axios', 'vue-toastification']
-        },
-        entryFileNames: 'assets/[name].[hash].js',
-        chunkFileNames: 'assets/[name].[hash].js',
-        assetFileNames: 'assets/[name].[hash][extname]'
+          vue: ['vue', 'vue-router', 'pinia']
+        }
       }
     },
-    chunkSizeWarningLimit: 1000
+    terserOptions: {
+      compress: {
+        drop_console: mode === 'production',
+        drop_debugger: mode === 'production',
+      },
+    },
   },
   server: {
     port: 3000,
-    strictPort: true,
+    open: true,
+  },
+  preview: {
+    port: 8080,
     open: true
   }
 }));
