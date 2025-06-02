@@ -19,14 +19,28 @@
         </div>
       </div>
     </div>
+    <!-- Use relative path for production -->
     <script type="module" src="/src/main.js"></script>
     <script>
       // Hide loading message when app is mounted
-      window.addEventListener('DOMContentLoaded', () => {
-        const app = document.getElementById('app');
-        if (app && app.children.length > 1) {
-          document.getElementById('loading').style.display = 'none';
-        }
+      document.addEventListener('DOMContentLoaded', () => {
+        const loading = document.getElementById('loading');
+        // Hide loading after a timeout as a fallback
+        setTimeout(() => {
+          if (loading && document.getElementById('app').children.length <= 1) {
+            loading.innerHTML = '<div style="text-align: center; color: red; padding: 20px;">' +
+              '<h2>Application failed to load</h2>' +
+              '<p>Please check the browser console for errors.</p>' +
+              '<p>If you are the site administrator, verify that:</p>' +
+              '<ul style="text-align: left; max-width: 500px; margin: 0 auto;">' +
+              '<li>The build completed successfully</li>' +
+              '<li>All required environment variables are set</li>' +
+              '<li>The server is properly configured to serve the SPA</li>' +
+              '</ul></div>';
+          } else if (loading) {
+            loading.style.display = 'none';
+          }
+        }, 5000);
       });
     </script>
   </body>
